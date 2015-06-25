@@ -5,7 +5,7 @@
   "authors": [
     "Shinobu Izumi <stagesp1@gmail.com>"
   ],
-  "description": "Camera Save Load in Unity",
+  "description": "Data Save Load in Unity",
   "keywords": [
     "data",
     "save",
@@ -20,6 +20,5 @@
     "test",
     "tests"
   ],
-  "main":{},
   "license": "MIT"
 }

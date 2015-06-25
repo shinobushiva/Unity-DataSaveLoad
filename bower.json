@@ -1,0 +1,17 @@
+{
+  "name": "Unity-DataSaveLoad",
+  "version": "0.1.0",
+  "homepage": "https://github.com/shinobushiva/Unity-DataSaveLoad",
+  "authors": [
+    "Shinobu Izumi <stagesp1@gmail.com>"
+  ],
+  "description": "Camera Save Load in Unity",
+  "keywords": [
+    "data",
+    "save",
+    "load",
+    "unity",
+    "unity3d"
+  ],
+  "license": "MIT",
+}

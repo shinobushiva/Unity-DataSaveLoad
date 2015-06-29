@@ -27,12 +27,8 @@ namespace DataSaveLoad{
 		}
 		private ConfirmDialogUI confirmDialogUI;
 
-		public delegate void DataLoadHandler(object data);
-		public event DataLoadHandler dataLoadHandler;
 
 		private System.Type type;
-
-
 
 		// Use this for initialization
 		void Awake () {
@@ -46,9 +42,8 @@ namespace DataSaveLoad{
 				DestroyImmediate(cde.gameObject);
 			}
 			
-			string folderPath = GetFolderPath();
+			string folderPath = Manager.GetFolderPath();
 			if (!Directory.Exists (folderPath)) {
-				
 			}
 			string[] files = Directory.GetFiles (folderPath);
 			
@@ -61,32 +56,9 @@ namespace DataSaveLoad{
 			}
 		}
 
-		public string GetFolderPath(){
-			return  string.Format("{0}/{1}", Application.persistentDataPath , Manager.folder);
-		}
-
-		public string GetFilePath(string fname){
-
-			return  string.Format("{0}/{1}", GetFolderPath() , fname+".txt");
-
-		}
-
-		public void Load(FileInfo fi, System.Type t){
-			string fn = fi.FullName;
-			print (fn);
-//			FileStream fs = new FileStream (fn, FileMode.Open, FileAccess.Read, FileShare.Read);
-			StreamReader sr = new StreamReader(fn, new System.Text.UTF8Encoding(false));
-			XmlSerializer ser = new XmlSerializer (t);
-			object obj = ser.Deserialize (sr);
-			sr.Close ();
-			
-			dataLoadHandler (obj);
-		}
-
 		public void Load(FileInfo fi){
-			Load (fi, type);
+			Manager.Load (fi, type);
 		}
-
 
 		public void ShowDialog(System.Type t){
 			type = t;

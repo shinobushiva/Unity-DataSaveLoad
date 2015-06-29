@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 namespace DataSaveLoad{
 	public class LoadDataUI : MonoBehaviour {
 
+		private string folder;
+
 		public RectTransform scrollContent;
 		public DataEntry prefab;
 
@@ -42,8 +44,9 @@ namespace DataSaveLoad{
 				DestroyImmediate(cde.gameObject);
 			}
 			
-			string folderPath = Manager.GetFolderPath();
+			string folderPath = Manager.GetFolderPath(folder);
 			if (!Directory.Exists (folderPath)) {
+				Directory.CreateDirectory(folderPath);
 			}
 			string[] files = Directory.GetFiles (folderPath);
 			
@@ -60,8 +63,9 @@ namespace DataSaveLoad{
 			Manager.Load (fi, type);
 		}
 
-		public void ShowDialog(System.Type t){
-			type = t;
+		public void ShowDialog(System.Type t, string folder){
+			this.type = t;
+			this.folder = folder;
 
 			gameObject.SetActive (true);
 			UpdateView ();

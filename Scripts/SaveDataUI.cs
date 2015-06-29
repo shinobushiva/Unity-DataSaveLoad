@@ -7,6 +7,8 @@ using System.IO;
 namespace DataSaveLoad {
 	public class SaveDataUI : MonoBehaviour {
 
+		private string folder;
+
 		public InputField fileName;
 
 		public DataSaveLoadMaster manager;
@@ -29,8 +31,9 @@ namespace DataSaveLoad {
 		
 		}
 
-		public void ShowDialog(object o){
-			data = o;
+		public void ShowDialog(object o, string folder){
+			this.data = o;
+			this.folder = folder;
 			gameObject.SetActive (true);
 		}
 
@@ -39,14 +42,18 @@ namespace DataSaveLoad {
 		}
 
 		public void Approved(bool forseOverride){
+			Approved (forseOverride, this.folder);
+		}
+
+		public void Approved(bool forseOverride, string folder){
 
 			//Application.persistentDataPath
-			string folderPath = manager.GetFolderPath ();
+			string folderPath = manager.GetFolderPath (folder);
 			if (!Directory.Exists (folderPath)) {
 				Directory.CreateDirectory(folderPath);
 			}
 
-			string filePath = manager.GetFilePath(fileName.text+".txt");
+			string filePath = manager.GetFilePath(fileName.text, folder);
 			if (!forseOverride && File.Exists (filePath)) {
 
 				confirmDialogUI.Show ("The record already exists",

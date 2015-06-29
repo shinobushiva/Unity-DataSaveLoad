@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace DataSaveLoad{
 	public class DataSaveLoadMaster : MonoBehaviour {
 
-		public string folder;
+//		private string folder;
 
 		public SaveDataUI saveDataUI;
 		public LoadDataUI loadDataUI;
@@ -26,20 +26,21 @@ namespace DataSaveLoad{
 		
 		}
 
-		public void ShowSaveDialog(object data){
-			saveDataUI.ShowDialog (data);
+		public void ShowSaveDialog(object data, string folder){
+			saveDataUI.ShowDialog (data, folder);
 		}
 
-		public void ShowLoadDialog(System.Type t){
-			loadDataUI.ShowDialog (t);
+		public void ShowLoadDialog(System.Type t, string folder){
+			loadDataUI.ShowDialog (t, folder);
 		}
 
-		public string GetFolderPath(){
-			return  string.Format("{0}/{1}", Application.persistentDataPath , folder);
+		public string GetFolderPath(string folder){
+
+			return  string.Format("{0}/{1}/{2}", Application.persistentDataPath , folder, Application.loadedLevelName);
 		}
 		
-		public string GetFilePath(string fname){
-			return  string.Format("{0}/{1}", GetFolderPath() , fname+".txt");
+		public string GetFilePath(string fname, string folder){
+			return  string.Format("{0}/{1}", GetFolderPath(folder) , fname+".txt");
 		}
 
 		public void WriteFile(string path, object obj, System.Type t){

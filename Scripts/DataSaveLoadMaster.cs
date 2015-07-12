@@ -12,7 +12,6 @@ namespace DataSaveLoad{
 		public SaveDataUI saveDataUI;
 		public LoadDataUI loadDataUI;
 
-		
 		public delegate void DataLoadHandler(object data);
 		public event DataLoadHandler dataLoadHandler;
 

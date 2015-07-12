@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Text;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace DataSaveLoad{
 	public class DataSaveLoadMaster : MonoBehaviour {
@@ -14,7 +15,14 @@ namespace DataSaveLoad{
 
 		
 		public delegate void DataLoadHandler(object data);
-		public event DataLoadHandler dataLoadHandler;
+//		public event DataLoadHandler<T> dataLoadHandler;
+		private Dictionary<System.Type, DataLoadHandler> handlerMap = new Dictionary<System.Type, DataLoadHandler> ();
+
+		public void AddHandler(DataLoadHandler dlh, System.Type t){
+			if (!handlerMap.ContainsKey (t)) {
+				handlerMap.Add(t, dlh);
+			}
+		}
 
 		// Use this for initialization
 		void Start () {
@@ -65,8 +73,8 @@ namespace DataSaveLoad{
 			XmlSerializer ser = new XmlSerializer (t);
 			object obj = ser.Deserialize (sr);
 			sr.Close ();
-			
-			dataLoadHandler (obj);
+
+			handlerMap[t] (obj);
 		}
 
 	}

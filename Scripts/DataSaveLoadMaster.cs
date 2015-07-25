@@ -77,5 +77,11 @@ namespace DataSaveLoad{
 			handlerMap[t] (obj);
 		}
 
+		public void Save(string file, string folder, object data){
+			saveDataUI.fileName.text = file;
+			saveDataUI.data = data;
+			saveDataUI.Approved (true, folder);
+		}
+
 	}
 }

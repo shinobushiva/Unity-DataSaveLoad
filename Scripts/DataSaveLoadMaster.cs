@@ -13,7 +13,6 @@ namespace DataSaveLoad{
 		public SaveDataUI saveDataUI;
 		public LoadDataUI loadDataUI;
 
-		
 		public delegate void DataLoadHandler(object data);
 //		public event DataLoadHandler<T> dataLoadHandler;
 		private Dictionary<System.Type, DataLoadHandler> handlerMap = new Dictionary<System.Type, DataLoadHandler> ();

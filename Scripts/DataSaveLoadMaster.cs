@@ -52,7 +52,7 @@ namespace DataSaveLoad{
 
 		public void WriteFile(string path, object obj, System.Type t){
 			
-			print (t);
+			//print (t);
 			XmlSerializer ser = new XmlSerializer (t);
 			
 			//書き込むファイルを開く（UTF-8 BOM無し）

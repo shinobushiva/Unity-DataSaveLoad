@@ -12,7 +12,9 @@ namespace DataSaveLoad {
 		public InputField fileName;
 
 		public DataSaveLoadMaster manager;
-		private ConfirmDialogUI confirmDialogUI;
+		public ConfirmDialogUI confirmDialogUI;
+
+
 
 		public object data;
 
@@ -23,7 +25,6 @@ namespace DataSaveLoad {
 				print ("CameraSaveLoadManager is missing!");
 				Destroy(this);
 			}
-			confirmDialogUI = GameObject.FindObjectOfType<ConfirmDialogUI> ();
 		}
 
 		// Update is called once per frame

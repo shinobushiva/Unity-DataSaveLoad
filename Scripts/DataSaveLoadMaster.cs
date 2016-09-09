@@ -28,39 +28,6 @@ namespace DataSaveLoad{
 		
 		}
 
-		System.Diagnostics.Process exProcess;
-
-		// Update is called once per frame
-		void Update () {
-
-			if (Input.GetKeyDown (KeyCode.O)) {
-				if(Input.GetKey(KeyCode.LeftShift)){
-					print ("Opening data folder");
-					string str = "\""+Application.persistentDataPath+"\"";
-					print (str);
-
-					exProcess = new System.Diagnostics.Process();
-					exProcess.StartInfo.FileName = "open";
-					exProcess.StartInfo.Arguments = str;
-
-					//外部プロセスの終了を検知してイベントを発生させます.
-					exProcess.EnableRaisingEvents = true;
-					exProcess.Exited += exProcess_Exited;
-
-					//外部のプロセスを実行する
-					exProcess.Start();
-
-				}
-			}
-		
-		}
-
-		void exProcess_Exited(object sender, System.EventArgs e)
-		{
-			UnityEngine.Debug.Log("Event!:"+e);
-			exProcess.Dispose();
-			exProcess = null;
-		}
 
 		public void ShowSaveDialog(object data, string folder){
 			saveDataUI.ShowDialog (data, folder);

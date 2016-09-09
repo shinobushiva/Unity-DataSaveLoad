@@ -14,8 +14,6 @@ namespace DataSaveLoad {
 		public DataSaveLoadMaster manager;
 		public ConfirmDialogUI confirmDialogUI;
 
-
-
 		public object data;
 
 		// Use this for initialization

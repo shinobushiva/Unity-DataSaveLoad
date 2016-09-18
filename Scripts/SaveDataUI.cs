@@ -12,7 +12,7 @@ namespace DataSaveLoad {
 		public InputField fileName;
 
 		public DataSaveLoadMaster manager;
-		public ConfirmDialogUI confirmDialogUI;
+		private ConfirmDialogUI confirmDialogUI;
 
 		public object data;
 
@@ -20,7 +20,13 @@ namespace DataSaveLoad {
 		void Awake () {
 
 			if (!manager) {
-				print ("CameraSaveLoadManager is missing!");
+				print ("DataSaveLoadManager is missing!");
+				Destroy(this);
+			}
+
+			confirmDialogUI = GameObject.FindObjectOfType<ConfirmDialogUI> ();
+			if (!confirmDialogUI) {
+				print ("Confirm Dialog UI is missing!");
 				Destroy(this);
 			}
 		}
@@ -73,6 +79,10 @@ namespace DataSaveLoad {
 				if(gameObject)
 					gameObject.SetActive(false);
 			}
+		}
+
+		void OnDisable(){
+			print ("Save Data UI Destroied");
 		}
 
 

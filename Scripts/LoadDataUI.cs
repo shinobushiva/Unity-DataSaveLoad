@@ -27,7 +27,7 @@ namespace DataSaveLoad{
 				return manager;
 			}
 		}
-		private ConfirmDialogUI confirmDialogUI;
+//		private ConfirmDialogUI confirmDialogUI;
 
 
 		private System.Type type;
@@ -35,7 +35,7 @@ namespace DataSaveLoad{
 		// Use this for initialization
 		void Awake () {
 			
-			confirmDialogUI = GameObject.FindObjectOfType<ConfirmDialogUI> ();
+//			confirmDialogUI = GameObject.FindObjectOfType<ConfirmDialogUI> ();
 		}
 
 		public void UpdateView(){

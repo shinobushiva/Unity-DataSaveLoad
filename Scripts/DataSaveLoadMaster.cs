@@ -39,11 +39,13 @@ namespace DataSaveLoad{
 
 		public string GetFolderPath(string folder){
 
-			return  string.Format("{0}/{1}/{2}", Application.persistentDataPath , folder, Application.loadedLevelName);
+
+			return  string.Format("{0}/{1}/{2}", Application.persistentDataPath , folder, 
+					UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 		}
 		
 		public string GetFilePath(string fname, string folder){
-			return  string.Format("{0}/{1}", GetFolderPath(folder) , fname+".txt");
+			return  string.Format("{0}/{1}", GetFolderPath(folder) , fname);
 		}
 
 		public void WriteFile(string path, object obj, System.Type t){
@@ -60,22 +62,39 @@ namespace DataSaveLoad{
 			File.WriteAllBytes(path, Encoding.UTF8.GetBytes(sw.ToString()));
 		}
 
+		public void Load(string folder, string file, System.Type t, DataLoadHandler handler){			
+			Load (new FileInfo(GetFilePath (file, folder)), t, handler);
+		}
+
 		public void Load(FileInfo fi, System.Type t){
+			Load (fi, t, handlerMap [t]);
+		}
+
+		public void Load(FileInfo fi, System.Type t, DataLoadHandler handler){
 			string fn = fi.FullName;
 			print (fn);
-			//			FileStream fs = new FileStream (fn, FileMode.Open, FileAccess.Read, FileShare.Read);
+
 			StreamReader sr = new StreamReader(fn, new System.Text.UTF8Encoding(false));
 			XmlSerializer ser = new XmlSerializer (t);
 			object obj = ser.Deserialize (sr);
 			sr.Close ();
 
-			handlerMap[t] (obj);
+			handler (obj);
 		}
 
 		public void Save(string file, string folder, object data){
 			saveDataUI.fileName.text = file;
 			saveDataUI.data = data;
 			saveDataUI.Approved (true, folder);
+		}
+
+		public void Delete(string file, string folder){
+			FileInfo fi = new FileInfo (GetFilePath (file, folder));
+			fi.Delete ();
+		}
+
+		public string createDatetimedFileName(string prefix = "", string postfix=""){
+			return string.Format (@"{0}{1}{2}",prefix, System.DateTime.Now.Ticks, postfix);
 		}
 
 	}

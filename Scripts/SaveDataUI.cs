@@ -70,7 +70,8 @@ namespace DataSaveLoad {
 			} else {
 				if(manager)
 					manager.WriteFile(filePath, data, data.GetType());
-				if(gameObject)
+				
+				if(this != null && gameObject != null)
 					gameObject.SetActive(false);
 			}
 		}

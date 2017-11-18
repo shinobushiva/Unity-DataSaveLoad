@@ -31,11 +31,6 @@ namespace DataSaveLoad {
 			}
 		}
 
-		// Update is called once per frame
-		void Update () {
-		
-		}
-
 		public void ShowDialog(object o, string folder){
 			this.data = o;
 			this.folder = folder;
@@ -61,6 +56,7 @@ namespace DataSaveLoad {
 			string filePath = manager.GetFilePath(fileName.text, folder);
 			if (!forseOverride && File.Exists (filePath)) {
 
+				gameObject.SetActive(false);
 				confirmDialogUI.Show ("The record already exists",
 			                      "The record will be overridden. Do you really want to do it?",
 			                      "Yes, I do", "No, I don't", 
@@ -68,9 +64,10 @@ namespace DataSaveLoad {
 					if (b) {
 						print ("overridden");
 						manager.WriteFile(filePath, data, data.GetType());
-						gameObject.SetActive(false);
+						
 					} else {
 						print ("wasn't saved"); 
+							gameObject.SetActive(true);
 					}
 				});
 			} else {

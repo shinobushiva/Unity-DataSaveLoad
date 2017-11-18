@@ -17,7 +17,14 @@ namespace DataSaveLoad{
 //		public event DataLoadHandler<T> dataLoadHandler;
 		private Dictionary<System.Type, DataLoadHandler> handlerMap = new Dictionary<System.Type, DataLoadHandler> ();
 
+		[System.Obsolete("use SetHandler instead")]
 		public void AddHandler(DataLoadHandler dlh, System.Type t){
+			if (!handlerMap.ContainsKey (t)) {
+				handlerMap.Add(t, dlh);
+			}
+		}
+
+		public void SetHandler(DataLoadHandler dlh, System.Type t){
 			if (!handlerMap.ContainsKey (t)) {
 				handlerMap.Add(t, dlh);
 			}

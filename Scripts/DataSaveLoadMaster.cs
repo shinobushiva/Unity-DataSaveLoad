@@ -65,7 +65,6 @@ namespace DataSaveLoad{
 			StringWriter sw = new StringWriter(sb);
 			ser.Serialize(sw, obj);
 			
-			print (path);
 			File.WriteAllBytes(path, Encoding.UTF8.GetBytes(sw.ToString()));
 		}
 
